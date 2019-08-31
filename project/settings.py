@@ -1,24 +1,23 @@
-from dotenv import load_dotenv
 import os
-from dotenv.main import dotenv_values
+from environs import Env
 
+env = Env()
+env.read_env()
 
-load_dotenv()
-
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = env.str("SECRET_KEY")
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv("DB_ENGINE"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"),
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'ENGINE': env.str("DB_ENGINE"),
+        'HOST': env.str("DB_HOST"),
+        'PORT': env.str("DB_PORT"),
+        'NAME': env.str("DB_NAME"),
+        'USER': env.str("DB_USER"),
+        'PASSWORD': env.str("DB_PASSWORD"),
     }
 }
 
-DEBUG = os.getenv("DEBUG")
+DEBUG = env.bool("DEBUG")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
